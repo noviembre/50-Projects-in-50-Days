@@ -1,7 +1,9 @@
 const smallCups = document.querySelectorAll('.cup-small');
 const listers = document.getElementById('liters');
-const percetage = document.getElementById('percentage');
+const percentage = document.getElementById('percentage');
 const remained = document.getElementById('remained');
+
+updateBigCup();
 
 smallCups.forEach((cup, idx) => {
     cup.addEventListener('click', () => highlightCups(idx))
@@ -18,5 +20,23 @@ function highlightCups(idx) {
         } else {
             cup.classList.remove('full')
         }
-    })
+    });
+
+    updateBigCup()
+}
+
+function updateBigCup() {
+    const fullCups = document.querySelectorAll('.cup-small.full').length;
+
+    const totalCups = smallCups.length;
+
+    if (fullCups === 0){
+        percentage.style.visibility = 'hidden';
+        percentage.style.height = 0
+    } else {
+        percentage.style.visibility = 'visible';
+        percentage.style.height = `${fullCups / totalCups * 330}px`;
+    }
+
+
 }
